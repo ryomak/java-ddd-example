@@ -1,0 +1,42 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.0.BUILD-SNAPSHOT'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+group = 'com.ykfoot'
+version = '0.0.1-SNAPSHOT'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+bootRun{
+	jvmArgs=[
+	        "-Dspring.profiles.active=dev,swagger"
+	]
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	compileOnly('io.springfox:springfox-swagger2:2.9.2')
+	compileOnly('io.springfox:springfox-swagger-ui:2.9.2')
+	compileOnly('io.springfox:springfox-core:2.9.2')
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
