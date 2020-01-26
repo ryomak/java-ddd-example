@@ -12,4 +12,8 @@ public class User {
     private String name;
     private int age;
     private Role role;
+
+    public boolean isAdmin(){
+        return Role.ADMIN.equals(role);
+    }
 }

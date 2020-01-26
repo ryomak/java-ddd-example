@@ -15,8 +15,8 @@ public class UserServiceImpl implements UserService {
 
     public Output get(Input input) {
         User user = userRepository.FindByUid(input.getUserID());
-        if (Role.NONE.equals(user.getRole())){
-            user.setRole(Role.ADMIN);
+        if (user.isAdmin()){
+            user.setName(user.getName() + "-admin");
         }
         return Output.builder().user(user).build();
     }
